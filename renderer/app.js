@@ -1,5 +1,6 @@
 /* Modules */
 const { ipcRenderer } = require('electron')
+const items = require('./items')
 
 // open-add-modal
 $('.open-add-modal').click(() => {
@@ -33,7 +34,10 @@ $('#item-input')
 
 /* LISTEN TO NEW ITEM FROM MAIN */
 ipcRenderer.on('new-item-success', (event, item) => {
-  console.log(item);
+  items.toreadItems.push(item)
+  items.saveItems()
+  // add item
+  items.addItem(item)
 
   // close and reset the modal
   $('#add-modal').removeClass('is-active')
@@ -41,3 +45,5 @@ ipcRenderer.on('new-item-success', (event, item) => {
   $('#add-button').removeClass('is-loading')
   $('.close-add-modal').removeClass('is-disabled')
 })
+
+if (items.toreadItems.length) items.toreadItems.forEach(items.addItem)

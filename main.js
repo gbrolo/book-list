@@ -1,14 +1,16 @@
 /* Modules */
 const { app, ipcMain } = require('electron')
 const mainWindow = require('./mainWindow')
+const readItem = require('./readItem')
 
 require('electron-reload')(__dirname)
 
 // Listener for new item
 ipcMain.on('new-item', (event, item) => {
-  setTimeout(() => {
-    event.sender.send('new-item-success', 'new read item')
-  }, 2000)
+  readItem(item, (it) => {
+    console.log(it);
+    event.sender.send('new-item-success', it)
+  })
 })
 
 /* Main Electron */
