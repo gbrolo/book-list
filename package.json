@@ -1,0 +1,18 @@
+{
+  "name": "Bookmarker",
+  "version": "1.0.0",
+  "description": "A simple bookmarker app made with Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/gbrolo/book-list",
+  "author": "Gabriel Brolo",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "~1.7.8"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
