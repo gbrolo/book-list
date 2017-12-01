@@ -54,7 +54,7 @@ const template = [
     submenu: [
       {
         label: 'Github repository',
-        click () { shell.openExternal('https://github.com/gbrolo/book-list') }
+        click () { shell.openExternal('https://github.com/gbrolo/bookmarker') }
       }
     ]
   }

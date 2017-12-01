@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/gbrolo/book-list",
+  "repository": "https://github.com/gbrolo/bookmarker",
   "author": "Gabriel Brolo",
   "license": "MIT",
   "devDependencies": {
