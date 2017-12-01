@@ -1,10 +1,24 @@
 /* Modules */
 const { ipcRenderer } = require('electron')
 const items = require('./items')
+const menu = require('./menu')
+
+// navigate with up/down arrows
+$(document).keydown((event) => {
+  switch (event.key) {
+    case 'ArrowUp':
+      items.changeItem('up')
+      break
+    case 'ArrowDown':
+      items.changeItem('down')
+      break
+  }
+})
 
 // open-add-modal
 $('.open-add-modal').click(() => {
   $('#add-modal').addClass('is-active')
+  $('#item-input').focus()
 })
 
 // close-add-modal
@@ -41,9 +55,27 @@ ipcRenderer.on('new-item-success', (event, item) => {
 
   // close and reset the modal
   $('#add-modal').removeClass('is-active')
-  $('#item-input').prop('disabled', false).val('')
+  $('#item-input').prop('disabled', false).val('http://')
   $('#add-button').removeClass('is-loading')
   $('.close-add-modal').removeClass('is-disabled')
+
+  // select item if its the first addition to array
+  if (items.toreadItems.length === 1) {
+    $('.read-item:first()').addClass('is-active')
+  }
 })
 
-if (items.toreadItems.length) items.toreadItems.forEach(items.addItem)
+// filter by search
+$('#search').keyup((event) => {
+  let filter = $(event.currentTarget).val()
+
+  $('.read-item').each((index, element) => {
+    $(element).text().toLowerCase().includes(filter) ? $(element).show() : $(element).hide()
+  })
+})
+
+// add items
+if (items.toreadItems.length) {
+  items.toreadItems.forEach(items.addItem)
+  $('.read-item:first()').addClass('is-active')
+}
